@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+</head>
+<body>
+    <h1>Pedidos</h1>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    <ul>
+        {% for pedido in pedidos %}
+            <li>
+                Pedido #{{ pedido.id }}:<br>
+                Cliente: {{ pedido.nombre_cliente }}<br>
+                Teléfono: {{ pedido.telefono }}<br>
+                Dirección: {{ pedido.direccion }}<br>
+                Fecha y Hora del Pedido: {{ pedido.fecha_hora }}<br>
+                {% if pedido.horario_retiro %}
+                Horario de Retiro: {{ pedido.horario_retiro }}<br>
+                {% endif %}
+                Productos:
+                <ul>
+                    {% for producto, cantidad in pedido.productos %}
+                        <li>{{ producto.nombre }} - ${{ producto.precio }} x {{ cantidad }}</li>
+                    {% endfor %}
+                </ul>
+                Total: ${{ pedido.total }}<br>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

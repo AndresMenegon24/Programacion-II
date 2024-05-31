@@ -1,0 +1,153 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    background-image: url('/static/images/pizza_background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: #ffffff;
+    text-align: center;
+    background-color: #009246; /* Verde de la bandera de Italia */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+h3 {
+    margin-top: 20px;
+    color: #555;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ce2b37; /* Rojo de la bandera de Italia */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #a52030; /* Rojo oscuro para hover */
+}
+
+.pedido-form label {
+    display: block;
+    margin-top: 10px;
+    color: #555;
+}
+
+.pedido-form input[type="text"],
+.pedido-form input[type="time"],
+.pedido-form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.producto-item {
+    margin-top: 10px;
+}
+
+.note {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.success-message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.pedido-detalle {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+/* Estilos para la página de login */
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.login-container h1 {
+    color: #ffffff;
+    background-color: #009246; /* Verde de la bandera de Italia */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.login-container label {
+    display: block;
+    margin-top: 10px;
+    color: #555;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ce2b37; /* Rojo de la bandera de Italia */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #a52030; /* Rojo oscuro para hover */
+}
+
+.flash-messages {
+    margin-top: 20px;
+    color: #d9534f; /* Rojo para los mensajes de error */
+}

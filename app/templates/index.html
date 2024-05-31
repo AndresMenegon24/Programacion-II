@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Pedidos de Pizzería</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script>
+        function setMinPickupTime() {
+            var now = new Date();
+            now.setMinutes(now.getMinutes() + 30);
+            var hours = String(now.getHours()).padStart(2, '0');
+            var minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('horario_retiro').min = hours + ':' + minutes;
+        }
+        window.onload = setMinPickupTime;
+
+        function validateForm() {
+            var productos = document.querySelectorAll('input[name="productos"]:checked');
+            if (productos.length === 0) {
+                alert("Debe seleccionar al menos un producto.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Sistema de Pedidos de Pizzería</h1>
+
+        {% if mensaje_exito %}
+            <div class="success-message">
+                <p>{{ mensaje_exito }}</p>
+            </div>
+        {% endif %}
+
+        {% if pedidos %}
+            <h2>Detalle del Pedido</h2>
+            <div class="pedido-detalle">
+                <ul>
+                    <li>Pedido #{{ pedidos.id }}</li>
+                    <li>Cliente: {{ pedidos.nombre_cliente }}</li>
+                    <li>Teléfono: {{ pedidos.telefono }}</li>
+                    <li>Dirección: {{ pedidos.direccion }}</li>
+                    <li>Fecha y Hora del Pedido: {{ pedidos.fecha_hora }}</li>
+                    <li>Horario de Retiro: {{ pedidos.horario_retiro }}</li>
+                    <li>Productos:
+                        <ul>
+                            {% for producto, precio, cantidad in pedidos.detalles %}
+                                <li>{{ producto }} - ${{ precio }} x {{ cantidad }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li>Total: ${{ pedidos.total }}</li>
+                </ul>
+            </div>
+        {% endif %}
+
+        <h2>Agregar Pedido</h2>
+        <form action="{{ url_for('agregar_pedido') }}" method="post" class="pedido-form" onsubmit="return validateForm()">
+            <label for="nombre_cliente">Nombre Completo:</label>
+            <input type="text" id="nombre_cliente" name="nombre_cliente" required><br>
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" required><br>
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" required><br>
+            <label for="horario_retiro">Horario de Retiro:</label>
+            <input type="time" id="horario_retiro" name="horario_retiro"><br>
+            <h3>Selecciona Productos y Cantidades:</h3>
+            {% for producto in productos %}
+                <div class="producto-item">
+                    <input type="checkbox" id="producto_{{ producto.id }}" name="productos" value="{{ producto.id }}">
+                    <label for="producto_{{ producto.id }}">{{ producto.nombre }} - ${{ producto.precio }}</label>
+                    <input type="number" name="cantidades" min="1" value="1">
+                </div>
+            {% endfor %}
+            <button type="submit">Agregar Pedido</button>
+        </form>
+
+        <p class="note">Nota: Los pedidos tienen una demora de por lo menos 30 minutos desde el momento en el que se hace el pedido.</p>
+    </div>
+</body>
+</html>

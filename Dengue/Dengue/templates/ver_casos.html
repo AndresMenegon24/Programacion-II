@@ -1,0 +1,391 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Casos Registrados</h1>
+
+<div class="charts-container">
+    <div class="chart">
+        <h2>Zonas con Mayor Riesgo Epidemiológico</h2>
+        <canvas id="riskChart"></canvas>
+    </div>
+    <div class="chart">
+        <h2>Agrupación por Grupos</h2>
+        <canvas id="groupChart"></canvas>
+    </div>
+    <div class="chart">
+        <h2>Agrupación por Género</h2>
+        <canvas id="genderChart"></canvas>
+    </div>
+    <div class="chart">
+        <h2>Agrupación por Rangos Etarios</h2>
+        <canvas id="ageChart"></canvas>
+    </div>
+    <div class="chart">
+        <h2>Estado de Ingreso por Barrio</h2>
+        <canvas id="statusByBarrioChart"></canvas>
+    </div>
+    <div class="chart">
+        <h2>Relación entre Grupo y Barrio</h2>
+        <canvas id="groupByBarrioChart"></canvas>
+    </div>
+    <div class="chart">
+        <h2>Relación entre Edad, Grupo y Barrio</h2>
+        <canvas id="ageGroupByBarrioChart"></canvas>
+    </div>
+</div>
+
+<div class="table-container">
+    <h2>Casos Registrados</h2>
+    <table>
+        <tr>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Sexo</th>
+            <th>Calle</th>
+            <th>Número</th>
+            <th>Barrio</th>
+            <th>Localidad</th>
+            <th>Departamento</th>
+            <th>Código Postal</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Grupo</th>
+            <th>Ingresa con Vida</th>
+            <th>Fecha de Registro</th>
+        </tr>
+        {% for caso in casos %}
+        <tr>
+            <td>{{ caso.dni }}</td>
+            <td>{{ caso.nombre }}</td>
+            <td>{{ caso.apellido }}</td>
+            <td>{{ caso.edad }}</td>
+            <td>{{ caso.sexo }}</td>
+            <td>{{ caso.calle }}</td>
+            <td>{{ caso.numero }}</td>
+            <td>{{ caso.barrio }}</td>
+            <td>{{ caso.localidad }}</td>
+            <td>{{ caso.departamento }}</td>
+            <td>{{ caso.codigo_postal }}</td>
+            <td>{{ caso.telefono }}</td>
+            <td>{{ caso.correo }}</td>
+            <td>{{ caso.grupo }}</td>
+            <td>{{ caso.ingresa_con_vida }}</td>
+            <td>{{ caso.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const casos = {{ casos|tojson }};
+    
+    // Prepare data for risk chart (barrios)
+    const barrios = {};
+    casos.forEach(c => {
+        if (barrios[c.barrio]) {
+            barrios[c.barrio]++;
+        } else {
+            barrios[c.barrio] = 1;
+        }
+    });
+    
+    const barrioLabels = Object.keys(barrios);
+    const barrioData = Object.values(barrios);
+
+    // Prepare data for group chart
+    const grupos = { 'A': 0, 'B': 0, 'C': 0 };
+    casos.forEach(c => {
+        grupos[c.grupo]++;
+    });
+    
+    const grupoLabels = Object.keys(grupos);
+    const grupoData = Object.values(grupos);
+
+    // Prepare data for gender chart
+    const generos = { 'M': 0, 'F': 0 };
+    casos.forEach(c => {
+        generos[c.sexo]++;
+    });
+    
+    const generoLabels = ['Masculino', 'Femenino'];
+    const generoData = [generos['M'], generos['F']];
+
+    // Prepare data for age chart
+    const rangosEtarios = { '0-10': 0, '11-17': 0, '18-30': 0, '31-59': 0, '60-100': 0 };
+    casos.forEach(c => {
+        if (c.edad <= 10) {
+            rangosEtarios['0-10']++;
+        } else if (c.edad <= 17) {
+            rangosEtarios['11-17']++;
+        } else if (c.edad <= 30) {
+            rangosEtarios['18-30']++;
+        } else if (c.edad <= 59) {
+            rangosEtarios['31-59']++;
+        } else {
+            rangosEtarios['60-100']++;
+        }
+    });
+    
+    const edadLabels = Object.keys(rangosEtarios);
+    const edadData = Object.values(rangosEtarios);
+
+    // Risk Chart (Barrios)
+    const ctxRisk = document.getElementById('riskChart').getContext('2d');
+    const riskChart = new Chart(ctxRisk, {
+        type: 'bar',
+        data: {
+            labels: barrioLabels,
+            datasets: [{
+                label: 'Casos por Barrio',
+                data: barrioData,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Group Chart
+    const ctxGroup = document.getElementById('groupChart').getContext('2d');
+    const groupChart = new Chart(ctxGroup, {
+        type: 'bar',
+        data: {
+            labels: grupoLabels,
+            datasets: [{
+                label: 'Casos por Grupo',
+                data: grupoData,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Gender Chart
+    const ctxGender = document.getElementById('genderChart').getContext('2d');
+    const genderChart = new Chart(ctxGender, {
+        type: 'pie',
+        data: {
+            labels: generoLabels,
+            datasets: [{
+                label: 'Casos por Género',
+                data: generoData,
+                backgroundColor: [
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true
+        }
+    });
+
+    // Age Chart
+    const ctxAge = document.getElementById('ageChart').getContext('2d');
+    const ageChart = new Chart(ctxAge, {
+        type: 'bar',
+        data: {
+            labels: edadLabels,
+            datasets: [{
+                label: 'Casos por Rango Etario',
+                data: edadData,
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Status by Barrio Chart
+    const ctxStatusByBarrio = document.getElementById('statusByBarrioChart').getContext('2d');
+    const statusByBarrioData = barrioLabels.map(barrio => ({
+        barrio,
+        vivos: casos.filter(c => c.barrio === barrio && c.ingresa_con_vida).length,
+        fallecidos: casos.filter(c => c.barrio === barrio && !c.ingresa_con_vida).length
+    }));
+
+    const statusByBarrioChart = new Chart(ctxStatusByBarrio, {
+        type: 'bar',
+        data: {
+            labels: barrioLabels,
+            datasets: [{
+                label: 'Ingresa con Vida',
+                data: statusByBarrioData.map(d => d.vivos),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Ingresa sin Vida',
+                data: statusByBarrioData.map(d => d.fallecidos),
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                x: {
+                    stacked: true
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Group by Barrio Chart
+    const ctxGroupByBarrio = document.getElementById('groupByBarrioChart').getContext('2d');
+    const groupByBarrioData = barrioLabels.map(barrio => ({
+        barrio,
+        grupoA: casos.filter(c => c.barrio === barrio && c.grupo === 'A').length,
+        grupoB: casos.filter(c => c.barrio === barrio && c.grupo === 'B').length,
+        grupoC: casos.filter(c => c.barrio === barrio && c.grupo === 'C').length
+    }));
+
+    const groupByBarrioChart = new Chart(ctxGroupByBarrio, {
+        type: 'bar',
+        data: {
+            labels: barrioLabels,
+            datasets: [{
+                label: 'Grupo A',
+                data: groupByBarrioData.map(d => d.grupoA),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Grupo B',
+                data: groupByBarrioData.map(d => d.grupoB),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Grupo C',
+                data: groupByBarrioData.map(d => d.grupoC),
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                x: {
+                    stacked: true
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Age, Group, Barrio Chart
+    const ctxAgeGroupByBarrio = document.getElementById('ageGroupByBarrioChart').getContext('2d');
+    const ageGroupByBarrioData = barrioLabels.map(barrio => ({
+        barrio,
+        '0-10': casos.filter(c => c.barrio === barrio && c.edad <= 10).length,
+        '11-17': casos.filter(c => c.barrio === barrio && c.edad >= 11 && c.edad <= 17).length,
+        '18-30': casos.filter(c => c.barrio === barrio && c.edad >= 18 && c.edad <= 30).length,
+        '31-59': casos.filter(c => c.barrio === barrio && c.edad >= 31 && c.edad <= 59).length,
+        '60-100': casos.filter(c => c.barrio === barrio && c.edad >= 60 && c.edad <= 100).length
+    }));
+
+    const ageGroupByBarrioChart = new Chart(ctxAgeGroupByBarrio, {
+        type: 'radar',
+        data: {
+            labels: barrioLabels,
+            datasets: [{
+                label: '0-10',
+                data: ageGroupByBarrioData.map(d => d['0-10']),
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1
+            },
+            {
+                label: '11-17',
+                data: ageGroupByBarrioData.map(d => d['11-17']),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            },
+            {
+                label: '18-30',
+                data: ageGroupByBarrioData.map(d => d['18-30']),
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            },
+            {
+                label: '31-59',
+                data: ageGroupByBarrioData.map(d => d['31-59']),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            },
+            {
+                label: '60-100',
+                data: ageGroupByBarrioData.map(d => d['60-100']),
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                r: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

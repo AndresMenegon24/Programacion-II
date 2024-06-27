@@ -2,13 +2,12 @@
 
 ## Archivos y Directorios Principales
 
-
-
 - **`app.py`**: Configuración principal de la aplicación Flask.
 - **`config.py`**: Configuración de la base de datos y otros parámetros.
 - **`models.py`**: Definición de los modelos de la base de datos.
 - **`forms.py`**: Definición de los formularios de la aplicación.
 - **`run.py`**: Script para iniciar la aplicación.
+- **`routes.py`**: Definición de las rutas y lógica de la aplicación.
 - **`/templates`**: Directorio que contiene los archivos HTML.
 - **`/static`**: Directorio que contiene archivos estáticos como CSS e imágenes.
 
@@ -24,12 +23,23 @@
 
     Abre tu navegador web y navega a `http://127.0.0.1:5000`.
 
-3. **Registrar un nuevo caso:**
+3. **Iniciar sesión:**
+
+    - Navega a `http://127.0.0.1:5000/login`.
+    - Utiliza las credenciales:
+        - **Usuario**: `admin`
+        - **Contraseña**: `1234`
+
+4. **Cerrar sesión:**
+
+    - Haz clic en `Cerrar Sesión` en el menú de navegación.
+
+5. **Registrar un nuevo caso:**
 
     - Navega a `Registrar Caso` en el menú de navegación.
     - Completa el formulario y haz clic en `Registrar`.
 
-4. **Ver casos registrados:**
+6. **Ver casos registrados:**
 
     - Navega a `Ver Casos` en el menú de navegación.
     - Visualiza los casos registrados y los gráficos generados.
@@ -49,3 +59,11 @@ La aplicación utiliza Chart.js para generar gráficos que ayudan a visualizar l
 - Estado de ingreso por barrio.
 - Relación entre grupo y barrio.
 - Relación entre edad, grupo y barrio.
+
+## Autenticación
+
+Se ha añadido una funcionalidad de autenticación básica que requiere que los usuarios inicien sesión antes de acceder a ciertas partes de la aplicación. Las credenciales por defecto son:
+- **Usuario**: `admin`
+- **Contraseña**: `1234`
+
+Para cerrar sesión, simplemente haz clic en `Cerrar Sesión` en el menú de navegación.

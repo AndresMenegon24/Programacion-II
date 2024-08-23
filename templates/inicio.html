@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRINCIPAL</title>
+    <link rel="stylesheet" href="../static/inicio.css">
+    <style>
+        /* Contenedor de las imágenes y el texto */
+        .image-container {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+        }
+
+        body {
+            background-color: #c6dbc8d6;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Estilo para las imágenes alineadas horizontalmente */
+        .image-container img {
+            height: 650px;
+            margin: 0;
+            padding: 0;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-container .middle-image {
+            width: 40%;
+        }
+
+        .image-container .side-image {
+            width: 30%;
+        }
+
+        /* Efecto blur */
+        .image-container img {
+            -webkit-filter: blur(3px);
+            filter: blur(3px);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+
+        .image-container img:hover {
+            -webkit-filter: blur(0);
+            filter: blur(0);
+        }
+
+        /* Estilo para el texto sobre las imágenes */
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            background: rgba(0, 0, 0, 0.084);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .my-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #21b621d4;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .my-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Contenedor de botones en la página principal */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Estilo para el contenedor del formulario de inicio de sesión */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .form-box {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .form-box h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            color: #333;
+        }
+
+        form label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="https://i.pinimg.com/originals/c8/8a/fa/c88afab31b468678911036fdd22ffdb2.jpg" alt="Imagen 1" class="side-image">
+        <img src="https://i.pinimg.com/originals/d2/2c/bf/d22cbf5e2b4cdfc13f253f30306a8cbd.jpg" alt="Imagen 2" class="middle-image">
+        <img src="https://i.pinimg.com/originals/44/2b/5e/442b5e0603be18d50624e5170dee9791.jpg" alt="Imagen 3" class="side-image">
+        <div class="overlay-text">
+            <h1>Tu Destino Deportivo Definitivo</h1>
+            <h2>Descubre las últimas noticias, resultados y destacados de tus deportes favoritos.</h2>
+            <div class="button-container">
+                <a href="#login-form" class="my-button" id="explore-button">Iniciar Sesión</a>
+                <a href="/registro" class="my-button" id="register-button">Registrarse</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor del formulario de Iniciar Sesión -->
+    <div class="form-container">
+        <div class="form-box" id="login-form">
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm" method="POST" action="/login">
+                <label for="username">Correo:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('explore-button').addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            window.scrollTo({
+                top: targetElement.offsetTop,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

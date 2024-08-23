@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Jugadores de la Selección</h1>
+
+<style>
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 300px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Suave incremento del tamaño de la tarjeta */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: contain; /* Ajusta la imagen para que se muestre completa */
+        background-color: #f8f9fa; /* Fondo claro para cuando la imagen no llene todo el espacio */
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        margin: 0;
+        color: #333;
+    }
+
+    .card-body p {
+        margin: 5px 0;
+        color: #555;
+    }
+
+    .card-body a {
+        color: #3498db;
+        text-decoration: none;
+    }
+
+    .card-body a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container">
+    <div class="card-container">
+        {% for jugador in jugadores %}
+        <div class="card">
+            <img src="{{ jugador[21] }}" class="card-img-top" alt="Foto del jugador">
+            <div class="card-body">
+                <h5 class="card-title">{{ jugador[1] }}</h5> <!-- Nombre del Jugador -->
+                <p class="card-text">Posición: {{ jugador[2] }}</p>
+                <p class="card-text">Edad: {{ jugador[4] }}</p>
+                <p class="card-text">Nacionalidad: {{ jugador[5] }}</p>
+                <p class="card-text">Número: {{ jugador[6] }}</p>
+                <p class="card-text">Equipo Actual: {{ jugador[7] }}</p>
+                <p class="card-text">Altura: {{ jugador[13] }}</p>
+                <p class="card-text">Peso: {{ jugador[14] }}</p>
+                <p class="card-text">Foto: <img src="{{ jugador[21] }}" alt="Foto del jugador"></p> <!-- Imagen del Jugador -->
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

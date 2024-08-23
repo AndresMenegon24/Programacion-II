@@ -1,0 +1,91 @@
+/* Asegúrate de que este CSS esté en el archivo /static/index.css */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+    background-color: #f4f4f4; /* Color de fondo claro */
+    color: #333; /* Color de texto */
+}
+
+.centered {
+    text-align: center;
+    padding: 60px 20px; /* Espacio alrededor del contenido centrado */
+    background-color: #ffffff; /* Fondo blanco para el área centrada */
+    border-radius: 10px; /* Bordes redondeados para el área centrada */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    margin: 20px; /* Espacio alrededor del área centrada */
+}
+
+.explore-button {
+    text-align: center;
+    margin: 40px 0; /* Espacio arriba y abajo del botón */
+}
+
+.my-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1.1em;
+    color: #fff;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.my-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px); /* Efecto de elevación al pasar el mouse */
+}
+
+.login-form {
+    margin: 60px auto; /* Espacio arriba y centrado del formulario */
+    max-width: 400px; /* Máximo ancho del formulario */
+    background-color: #ffffff; /* Fondo blanco para el formulario */
+    padding: 20px;
+    border-radius: 10px; /* Bordes redondeados para el formulario */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+form {
+    display: block; /* Asegura que el formulario se muestre correctamente */
+}
+
+form label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold; /* Texto en negrita para las etiquetas */
+}
+
+form input {
+    display: block;
+    width: calc(100% - 16px); /* Ajusta el ancho para el padding */
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 5px; /* Bordes redondeados para los campos de entrada */
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+    transition: border-color 0.3s; /* Transición para el borde */
+}
+
+form input:focus {
+    border-color: #007bff; /* Cambia el color del borde al enfocar */
+    outline: none; /* Elimina el borde de enfoque predeterminado */
+}
+
+form button {
+    padding: 12px 24px;
+    font-size: 1.1em;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+form button:hover {
+    background-color: #218838;
+    transform: translateY(-3px); /* Efecto de elevación al pasar el mouse */
+}

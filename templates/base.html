@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Deportes Mendoza{% endblock %}</title>
+    <link rel="stylesheet" href="/static/index.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed; /* Fijo en la parte superior */
+            top: 0;
+            left: 0; /* Asegura que esté alineado con el borde izquierdo */
+            width: 100%; /* Ocupa todo el ancho */
+            z-index: 1000; /* Encima del contenido */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Sombra sutil */
+        }
+
+        .header .logo h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .nav {
+            margin-top: 10px;
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            background-color: #e74c3c;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav a:hover {
+            background-color: #c0392b;
+        }
+
+        .content {
+            margin-top: 100px; /* Ajusta el margen superior para evitar ocultar el contenido bajo el encabezado */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>Deportes Mendoza</h1>
+        </div>
+        <nav class="nav">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Noticias</a>
+            <a href="{{ url_for('seleccion') }}" class="btn btn-primary">Selecciones</a>
+            <a href="{{ url_for('resultado') }}" class="btn btn-primary">Jugadores</a>
+            <a href="{{ url_for('torneo') }}" class="btn btn-primary">Estadísticas</a>
+            <a href="{{ url_for('estadistica') }}" class="btn btn-primary">Resultados</a>            
+        </nav>
+    </header>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

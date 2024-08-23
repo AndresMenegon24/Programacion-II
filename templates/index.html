@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INICIO</title>
+    <link rel="stylesheet" href="/static/index.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .logo h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .nav {
+            margin-top: 10px;
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            background-color: #e74c3c;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav a:hover {
+            background-color: #c0392b;
+        }
+
+        .news-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-container a {
+            position: relative;
+            flex: 1 1 calc(33.333% - 40px); /* Tres imágenes por fila */
+            max-width: calc(33.333% - 40px);
+            text-decoration: none;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; /* Añadido para asegurar que el contenedor a tenga altura adecuada */
+            align-items: center; /* Centra el contenido verticalmente */
+            justify-content: center; /* Centra el contenido horizontalmente */
+        }
+
+        .news-container a img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+            display: block;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .news-container a:hover img {
+            transform: scale(1.05);
+        }
+
+        .news-container a:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .news-container .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            font-size: 1rem;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .news-container a:hover .overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>Deportes Mendoza</h1>
+        </div>
+        <nav class="nav">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Noticias</a>
+            <a href="{{ url_for('seleccion') }}" class="btn btn-primary">Selecciones</a>
+            <a href="{{ url_for('resultado') }}" class="btn btn-primary">Jugadores</a>
+            <a href="{{ url_for('torneo') }}" class="btn btn-primary">Resultados</a>
+            <a href="{{ url_for('estadistica') }}" class="btn btn-primary">Estadísticas</a>            
+        </nav>
+    </header>
+    <div class="news-container">
+        <a href="https://www.goal.com/es-ar">
+            GOAL
+        </a>
+        <a href="https://www.futbolred.com/">
+            FUTBOLRED
+        </a>
+        <a href="https://www.futbolargentino.com/">
+            FUTBOL ARGENTINO
+        </a>
+        <a href="https://www.espn.com.ar/futbol/">
+            ESPN
+        </a>
+        <a href="https://www.lanacion.com.ar/deportes/futbol/">
+            LA NACIÓN
+        </a>
+        <a href="https://www.sport.es/es/">
+            SPORT
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+
+
+body {
+    font-family: 'Roboto', sans-serif; /* Fuente moderna y legible */
+    line-height: 1.8; /* Mejora la legibilidad del texto */
+    margin: 30px;
+    color: #333;
+    background-color: #e9ecef; /* Color de fondo más suave */
+}
+
+h1 {
+    color: #343a40; /* Color más oscuro para el encabezado principal */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5em; /* Tamaño más grande para destacar */
+}
+
+h2 {
+    color: #495057; /* Color más oscuro para los subtítulos */
+    margin-bottom: 25px; /* Mayor espacio debajo de los subtítulos */
+    font-size: 1.8em; /* Tamaño más grande para subtítulos */
+}
+
+p {
+    margin-bottom: 20px; /* Espacio aumentado debajo de los párrafos */
+    font-size: 1.1em; /* Tamaño de fuente ligeramente mayor */
+}
+
+.highlight {
+    background-color: #ffffff; /* Fondo blanco para resaltar */
+    border-left: 8px solid #007bff; /* Borde más grueso y de color más vibrante */
+    padding: 15px;
+    font-style: italic;
+    margin: 30px 0; /* Mayor espacio alrededor del resaltado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+.quote {
+    font-style: italic;
+    border-left: 8px solid #007bff; /* Borde más grueso para citas */
+    padding-left: 15px;
+    margin: 30px 0;
+    background-color: #f9f9f9; /* Fondo ligero para citas */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+.image-container {
+    text-align: center;
+    margin: 30px 0; /* Espacio aumentado alrededor de la imagen */
+}
+
+.image-container img {
+    max-width: 90%; /* Tamaño máximo de la imagen más amplio */
+    height: auto;
+    border-radius: 12px; /* Bordes redondeados más pronunciados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil para la imagen */
+}
+
+.image-caption {
+    font-size: 16px; /* Tamaño de fuente más grande para la leyenda */
+    color: #6c757d; /* Color más suave para la leyenda */
+    margin-top: 10px;
+}
+
+.ad-container {
+    position: relative;
+    margin: 30px 0; /* Espacio aumentado alrededor del contenedor de anuncios */
+}
+
+.ad-container img {
+    width: 100%;
+    max-width: 300px; /* Tamaño máximo más grande para los anuncios */
+    height: auto;
+    float: right;
+    margin-left: 25px; /* Mayor espacio a la izquierda del anuncio */
+    border-radius: 12px; /* Bordes redondeados más pronunciados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil para el anuncio */
+}
